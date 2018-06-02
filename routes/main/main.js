@@ -33,6 +33,11 @@ router.get('/getAccounts', (req, res) => {
 /*
  Method : Post
 */
+
+router.post('/register_form', function (req, res, next){
+    res.render('register');
+});
+
 router.post('/login', async(req,res,next) => {
     console.log(' here ');
 
