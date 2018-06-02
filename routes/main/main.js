@@ -18,9 +18,17 @@ const truffle_connect = require('../../connection/app.js');
 router.get('/', express.static('views'));
 
 
-router.get('/2', (req, res) => {
 
-    
+router.get('/2', (req, res) => {
+    console.log('hello 1');
+    express.static('public');
+    console.log('hello 2');
+    res.send("good");
+});
+
+
+
+router.get('/2', (req, res) => {
     console.log('hello ?');
     truffle_connect.start(function (answer) {
         console.log(answer);
