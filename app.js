@@ -10,59 +10,51 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 
-
-
-
-
 const port = 3001;
 const Web3 = require('web3');
 const truffle_connect = require('./connection/app.js');
+const routes = require('./routes/routes');
 
+/*
+ app.set
+*/
+app.set('views', path.join(__dirname, './views'));
+app.set('view engine', 'ejs');
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+/*
+  app.use
+*/
+app.use(helmet());
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
+// app.use('/', express.static('public_static'));
 
 // parse application/json
 app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.use('/', express.static('public_static'));
+app.use('/',routes);
 
-app.get('/getAccounts', (req, res) => {
-  console.log("**** GET /getAccounts ****");
-  truffle_connect.start(function (answer) {
-    res.send(answer);
-  })
+app.use(function(req, res, next)
+{
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-app.post('/getBalance', (req, res) => {
-  console.log("**** GET /getBalance ****");
-  console.log(req.body);
-  let currentAcount = req.body.account;
+// Error handler
+app.use(function(err, req, res, next)
+{
+  res.locals.message = err.message;
+  // console.log("res.locals.message error : " + res.locals.message);
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // console.log("res.locals.error error : " + res.locals.error);
 
-  truffle_connect.refreshBalance(currentAcount, (answer) => {
-    let account_balance = answer;
-    truffle_connect.start(function(answer){
-      // get list of all accounts and send it along with the response
-      let all_accounts = answer;
-      response = [account_balance, all_accounts]
-      res.send(response);
-    });
-  });
+  res.status(err.status || 500);
+  res.render('error',{errLog : res.locals.error});
 });
-
-app.post('/sendCoin', (req, res) => {
-  console.log("**** GET /sendCoin ****");
-  console.log(req.body);
-
-  let amount = req.body.amount;
-  let sender = req.body.sender;
-  let receiver = req.body.receiver;
-
-  truffle_connect.sendCoin(amount, sender, receiver, (balance) => {
-    res.send(balance);
-  });
-});
-
 
 app.listen(port, () => {
 
@@ -73,7 +65,8 @@ app.listen(port, () => {
   } else {
     console.warn("No web3 detected. Falling back to http://127.0.0.1:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    truffle_connect.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    truffle_connect.web3 = new Web3(new Web3.
+      providers.HttpProvider("http://localhost:8545"));
   }
   console.log("Express Listening at http://localhost:" + port);
 
