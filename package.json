@@ -24,13 +24,16 @@
     "web3": "^0.20.0"
   },
   "dependencies": {
+    "async": "^2.6.1",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
+    "ejs": "^2.6.1",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "helmet": "^3.12.1",
     "jquery": "^3.3.1",
     "morgan": "^1.9.0",
-    "nodemon": "^1.14.12"
+    "nodemon": "^1.14.12",
+    "promise-mysql": "^3.2.1"
   }
 }
