@@ -14,18 +14,13 @@ const truffle_connect = require('../../connection/app.js');
  Method : Get
 */
 
-
-router.get('/', express.static('views'));
-
-
-router.get('/2', (req, res) => {
-    console.log('hello ?');
-    truffle_connect.start(function (answer) {
-        console.log(answer);
-      res.send(answer);
-    })
+router.get('/',function(req,res){
+    res.render('index');
 });
 
+router.get('/main',function(req,res){
+    res.render('main');
+});
 
 router.get('/getAccounts', (req, res) => {
     console.log("**** GET /getAccounts ****");
@@ -38,6 +33,29 @@ router.get('/getAccounts', (req, res) => {
 /*
  Method : Post
 */
+router.post('/login', async(req,res,next) => {
+    console.log(' here ');
+
+    const user_id = req.body.id;
+    const password = req.body.password;
+
+    let selectID =
+    `
+    SELECT id
+    FROM users
+    WHERE id = ? and password = ?
+    `;
+
+    let result = await db.Query(selectID,[user_id,password]);
+    if(result.length != 0){
+        res.redirect('/main');
+    }
+    else{
+        res.redirect('/');
+    }
+})
+
+
 router.post('/getBalance', (req, res) => {
     console.log("**** GET /getBalance ****");
     console.log(req.body);
