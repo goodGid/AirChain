@@ -9,17 +9,21 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
+const db = require('./module/pool');
 
 const port = 3001;
 const Web3 = require('web3');
 const truffle_connect = require('./connection/app.js');
 const routes = require('./routes/routes');
 
+
+
 /*
  app.set
 */
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
+
 
 /*
   app.use

@@ -16,13 +16,9 @@
 <link href="css/animate.css" rel="stylesheet" />
 <link href="css/style.css" rel="stylesheet">
 <link href="css/default.css" rel="stylesheet">
-<link rel="stylesheet" href="common/jquery-ui.css" />
-<link rel="stylesheet" href="common/jquery-ui.min.css" />
-<script src="common/jquery.js" type="text/javascript"></script>
-<script src="common/jquery-ui.js"></script>
-<script src="common/jquery-ui.min.js"></script>	
-<link type="text/css" rel="stylesheet" href="common/form2.css">
-<script type="text/javascript" src="js/form.js"></script>
+
+
+<script type="text/javascript" src="javascripts/form.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -30,36 +26,40 @@ $(document).ready(function() {
 });
 </script>
 </head>
+<script>
+	function fetch_private_key(){
+		document.getElementById('private_key').innerHTML = document.getElementById('span1').innerHTML;
+	}
+</script>
 <body>
 	<div id="example">
 
 		<div id="tab-1">
 			<ul id="gn-menu" class="gn-menu-main">
-			<form name="myform" action="/register" method="post">
+			<form name="myform" action="/register" method="post">	
 			<fieldset>
 				<legend>회원가입을 위한 기초정보입력</legend>
 				<h2>회원가입 페이지</h2>
 				<table class="typeA">
-					<tbody>
+				<tbody>
 					<tr>
-						<th width="75px">이름</th>
-						<td><input type="text" name="username" placeholder = "홍길동" required = "true" autofocus=""></td>
+					<button type="button" class="btn btn-skin scroll" onclick = "fetch_private_key();" > 개인키 발급 받기 </button>	
 					</tr>
-					
+					<span id="span1" style='visibility:hidden'> <%= userId %></span>
+					<p>개인키 값은 : <h1 id =private_key></h1>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="text" name="userpw1" placeholder="영문,숫자,특수문자 8~12자" required = "true"></td>
+						<td><input type="password" name="userpw1" placeholder="비밀번호 입력" required = "true"></td>
 					</tr>
-				
 				</tbody>
 				</table>
                     <button name = "Submit" type="Submit" value ="register" class="btn btn-skin scroll">회원가입</button>
-					<button type="reset" class="btn btn-skin scroll">취소</button>
-				</fieldset>
-				<button type="button" class="btn btn-skin scroll" onclick="layer_open()"> 개인키 발급 받기 </button>
+					<button type="reset" class="btn btn-skin scroll" onclick="history.back(-1)">취소</button>
+				</fieldset>	
 			</ul>
 		</form>
 	</div>
 	</div>
 </body>
 </html>
+
