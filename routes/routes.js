@@ -10,6 +10,6 @@ router.use('/', main_page);
 
 // Register
 const Register = require('./users/users_routes');
-router.use('/', Register);
+router.use('/register', Register);
 
 module.exports = router;

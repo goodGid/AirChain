@@ -25,37 +25,41 @@ $(document).ready(function() {
 </head>
 <script>
 	function fetch_private_key(){
-		document.getElementById('private_key').innerHTML = document.getElementById('span1').innerHTML;
+		document.getElementById('private_key').innerHTML = document.getElementById('userId').innerHTML;
+		document.getElementById('identi_key').innerHTML = document.getElementById('identiKey').innerHTML;
 	}
 </script>
+
 <body>
 	<div id="example">
-
 		<div id="tab-1">
 			<ul id="gn-menu" class="gn-menu-main">
-			<form name="myform" action="/register" method="post">	
-			<fieldset>
-				<legend>회원가입을 위한 기초정보입력</legend>
-				<h2>회원가입 페이지</h2>
-				<table class="typeA">
-				<tbody>
-					<tr>
-					<button type="button" class="btn btn-skin scroll" onclick = "fetch_private_key();" > 개인키 발급 받기 </button>	
-					</tr>
-					<span id="span1" style='visibility:hidden'> <%= userId %></span>
-					<p>개인키 값은 : <h1 id =private_key></h1>
-					<tr>
-						<th>비밀번호</th>
-						<td><input type="password" name="userpw1" placeholder="비밀번호 입력" required = "true"></td>
-					</tr>
-				</tbody>
-				</table>
-                    <button name = "Submit" type="Submit" value ="register" class="btn btn-skin scroll">회원가입</button>
-					<button type="reset" class="btn btn-skin scroll" onclick="history.back(-1)">취소</button>
-				</fieldset>	
+				<form name="myform" action="/register" method="post">	
+					<fieldset>
+						<legend>회원가입을 위한 기초정보입력</legend>
+						<h2>회원가입 페이지</h2>
+						<table class="typeA">
+							<tbody>
+								<tr>
+									<button type="button" class="btn btn-skin scroll" onclick = "fetch_private_key();" > 개인키 발급 받기 </button>	
+								</tr>
+			
+								<span id="userId" style='visibility:hidden'> <%= userId %></span>
+								<span id="identiKey" style='visibility:hidden'> <%= identiKey %></span>
+								<p>개인키 값 : <h1 id = "private_key"></h1></p>		
+								<p>인증번호 : <h1 id = "identi_key"></h1></p>		
+								<tr>	
+									<th>비밀번호</th>
+									<td><input type="password" id="userpw1" name="userpw1" placeholder="비밀번호 입력" required = "true"></td>	
+								</tr>	
+							</tbody>
+						</table>
+						<button name = "Submit" type="Submit" value ="register" class="btn btn-skin scroll">회원가입</button>
+						<button type="reset" class="btn btn-skin scroll" onclick="history.back(-1)">취소</button>			
+					</fieldset>				
+				</form>
 			</ul>
-		</form>
-	</div>
+		</div>
 	</div>
 </body>
 </html>
