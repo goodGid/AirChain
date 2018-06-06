@@ -19,7 +19,8 @@ router.get('/',function(req,res){
 });
 
 router.get('/main',function(req,res){
-    res.render('main');
+    // res.render('main');
+    res.render('book');
 });
 
 router.get('/getAccounts', (req, res) => {
