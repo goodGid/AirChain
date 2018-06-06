@@ -33,23 +33,35 @@ function getIdentiNumber(){
 /*
  Method : Post
 */
+router.post('/', async(req, res, next)=>{
+    
+    const userId = req.body.userId;
+    const private_key = req.body.private_key;
+    const userpw1 = req.body.userpw1;
+
+    console.log('userId : ' + userId);
+    console.log('private_key : ' + private_key);
+    console.log('userpw1 : ' + userpw1);
+
+    res.render('index');
+
+});
+
+
 
 router.post('/register_form', async(req, res, next)=>{
-    var user = '123';
     let result = await db.Query('select * from users where status = 0 ORDER BY RAND() LIMIT 1');
     var userId = result[0].account_key;
-    var idx = result[0].idx;
-    var parmas1 = [1, idx];
-    await db.Query('update users set status = ? where idx = ?', parmas1);
+    var identiKey = await getIdentiNumber();
 
-    var parmas2 = [];
-    var _result = await getIdentiNumber();
-    parmas2.push(_result);
-    parmas2.push(idx);
-    
-    await db.Query('update users set auth_num = ? where idx =?', parmas2);
+    // await db.Query('update users set status = ? where idx = ?', parmas1);  
+    // await db.Query('update users set auth_num = ? where idx =?', parmas2);
+
+
+
     res.render('register',{
-        userId : userId
+        userId : userId,
+        identiKey : identiKey
     });
 });
 
