@@ -18,14 +18,25 @@ router.get('/',function(req,res){
     res.render('index');
 });
 
-router.get('/main',function(req,res){
-    // res.render('main');
-    res.render('book');
+router.get('/main/:userIdx&:userLevel',function(req,res){
+
+    let userIdx = req.params.userIdx;
+    let userLevel = req.params.userLevel;
+    res.render('book',{
+        userIdx : userIdx,
+        userLevel : userLevel
+    });
+});
+
+
+router.get('/main2',function(req,res){
+    res.render('main');
 });
 
 router.get('/getAccounts', (req, res) => {
     console.log("**** GET /getAccounts ****");
     truffle_connect.start(function (answer) {
+        console.log('answer : ' + answer);
       res.send(answer);
     })
 });
@@ -36,21 +47,19 @@ router.get('/getAccounts', (req, res) => {
 */
 
 router.post('/login', async(req,res,next) => {
-    console.log(' here ');
-
     const user_id = req.body.id;
     const password = req.body.password;
 
     let selectID =
     `
-    SELECT id
+    SELECT idx, level
     FROM users
     WHERE id = ? and password = ?
     `;
 
     let result = await db.Query(selectID,[user_id,password]);
     if(result.length != 0){
-        res.redirect('/main');
+        res.redirect('/main/' + result[0].idx + "&" + result[0].level);
     }
     else{
         res.redirect('/');
