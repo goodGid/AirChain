@@ -23,7 +23,6 @@ module.exports = {
       }
       self.accounts = accs;
       self.account = self.accounts[2];
-      now_account = self.accounts[0];
 
       callback(self.accounts);
     });
@@ -40,7 +39,6 @@ module.exports = {
       air = instance;
       return air.chkBook.call(countryId,userIdx, {from: sender});
     }).then(function(res) {
-      console.log('res : ' + res[0]);
         callback(res);
     }).catch(function(e) {
       console.log("Error : " + e);
@@ -49,42 +47,61 @@ module.exports = {
 
   },
 
-  refreshBalance: function(account, callback) {
+  updateMyLevel: function(userIdx, userLevel, sender, callback){
     var self = this;
 
     // Bootstrap the Airport abstraction for Use.
     Airport.setProvider(self.web3.currentProvider);
 
-    var meta;
+    var air
     Airport.deployed().then(function(instance) {
-      meta = instance;
-      return meta.getBalance.call(account, {from: account});
-    }).then(function(value) {
-        callback(value.valueOf());
+      air = instance;
+      return air.setUserLevel.call(userIdx, userLevel, {from: sender});
+    }).then(function(res) {
+        callback(res);
     }).catch(function(e) {
-        console.log(e);
-        callback("Error 404");
+      console.log("Error : " + e);
+      callback("ERROR 404");
     });
   },
 
 
-  sendCoin: function(amount, sender, receiver, callback) {
+
+  getCountryLevel: function(countryId, sender, callback){
     var self = this;
 
     // Bootstrap the Airport abstraction for Use.
     Airport.setProvider(self.web3.currentProvider);
 
-    var meta;
+    var air
     Airport.deployed().then(function(instance) {
-      meta = instance;
-      return meta.sendCoin(receiver, amount, {from: sender});
-    }).then(function() {
-      self.refreshBalance(sender, function (answer) {
-        callback(answer);
-      });
+      air = instance;
+      return air.getCountryLevel.call(countryId, {from: sender});
+    }).then(function(res) {
+        callback(res);
     }).catch(function(e) {
-      console.log(e);
+      console.log("Error : " + e);
+      callback("ERROR 404");
+    });
+  },
+
+  setCountryLevel: function(countries, sender, callback){
+    var self = this;
+
+    // Bootstrap the Airport abstraction for Use.
+    Airport.setProvider(self.web3.currentProvider);
+
+    var air
+    Airport.deployed().then(function(instance) {
+      air = instance;
+      return air.setCountryLevel.call(countries, {from: sender});
+    }).then(function(res) {
+        callback(res);
+    }).catch(function(e) {
+      console.log("Error : " + e);
       callback("ERROR 404");
     });
   }
+
+
 }
