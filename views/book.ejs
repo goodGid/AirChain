@@ -8,7 +8,7 @@
     <title>Pete's Pet Shop</title>
 
     <!-- Bootstrap -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -22,6 +22,9 @@
       <div class="row">
         <div class="col-xs-12 col-sm-8 col-sm-push-2">
           <h1 class="text-center">Country's Book Shop</h1>
+          <span id="userIdx" style="visibility: hidden;"><%= userIdx %></span>
+          <span id="userIdx"><%= userIdx %></span>
+          <span id="userLevel"><%= userLevel %></span>
           <hr/>
           <br/>
         </div>
@@ -34,7 +37,7 @@
 
     <div id="bookTemplate" style="display: none;">
       <div class="col-sm-6 col-md-4 col-lg-3">
-        <div class="panel panel-default panel-pet">
+        <div class="panel panel-default panel-book">
           <div class="panel-heading">
             <h3 class="panel-title">Scrappy</h3>
           </div>
@@ -51,9 +54,9 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="javascripts/web3.min.js"></script>
-    <script src="javascripts/truffle-contract.js"></script>
-    <script src="javascripts/book.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/javascripts/web3.min.js"></script>
+    <script src="/javascripts/truffle-contract.js"></script>
+    <script src="/javascripts/book.js"></script>
   </body>
 </html>
