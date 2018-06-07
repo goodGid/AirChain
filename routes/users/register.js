@@ -7,9 +7,6 @@ const async = require('async');
 const bodyParser = require('body-parser');
 const db = require('../../module/pool.js');
 
-const Web3 = require('web3');
-const truffle_connect = require('../../connection/app.js');
-
 
 function getIdentiNumber(){
     return new Promise( async function(resolve, reject){    

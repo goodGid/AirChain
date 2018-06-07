@@ -22,7 +22,7 @@ contract Airport {
     }
 
 
-    function chkBook(uint256 country_idx, uint256 user_idx) public returns (bool) {
+    function chkBook(uint256 country_idx, uint256 user_idx) public returns (bool result) {
         require(country_idx >= 0 && country_idx <= 15);
         if( country_level[country_idx] <= user_idx ){
             country[country_idx] = msg.sender;
