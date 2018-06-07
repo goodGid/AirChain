@@ -25,8 +25,6 @@ $(document).ready(function () {
         li="<li>"+response[1][i]+"</li>";
         list.append(li)
       }
-
-
     })
   })
 

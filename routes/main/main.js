@@ -63,19 +63,56 @@ router.post('/login', async(req,res,next) => {
 
 
 router.post('/book', (req, res) => {
-    console.log("**** GET /book ****");
+    console.log("**** POST /book ****");
   
     let countryId = req.body.countryId;
     let userIdx = req.body.userIdx;
     let sender = req.body.sender;
 
-    console.log('sender : ' + sender);
-  
     airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
-        console.log(' [router -> main.js] res : ' + result);
-      res.send({result});
+      res.send(result);
     });
 });
+
+router.post('/getCountryLevel', (req, res) => {
+    console.log("**** POST /getCountryLevel ****");
+  
+    let countryId = req.body.countryId;
+    let sender = req.body.sender;
+
+    airport_truffle_connect.getCountryLevel(countryId, sender, (result) => {
+      res.send(result);
+    });
+});
+
+
+
+router.post('/updateMyLevel', (req, res) => {
+    console.log("**** POST /updateMyLevel ****");
+  
+    let userIdx = req.body.userIdx;
+    let userLevel = req.body.userLevel;
+    let sender = req.body.sender;
+
+    airport_truffle_connect.updateMyLevel(userIdx, userLevel, sender, (result) => {
+      res.send(result);
+    });
+});
+
+
+router.post('/setCountryLevel', (req, res) => {
+    console.log("**** POST /setCountryLevel ****");
+  
+    let sender = req.body.sender;
+    let countries = [7,5,3,4,6,4,1,5,2,1,3,4,6,5,2,3];
+    
+    airport_truffle_connect.setCountryLevel(countries, sender, (result) => {
+      res.send(result);
+    });
+});
+
+
+
 
 
 
