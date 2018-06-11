@@ -62,16 +62,31 @@ router.post('/login', async(req,res,next) => {
 })
 
 
-router.post('/book', (req, res) => {
+router.post('/book', async (req, res) => {
     console.log("**** POST /book ****");
   
     let countryId = req.body.countryId;
     let userIdx = req.body.userIdx;
     let sender = req.body.sender;
 
-    airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
-      res.send(result);
+    await airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
+    //   res.send(result);
     });
+
+
+    let insertQuery =
+    `
+    INSERT INTO book_list(id,country)
+    VALUES (?,?)
+    `;
+
+    let result = await db.Query(insertQuery,[userIdx,countryId]);
+    if(result.length != 0){
+        res.send("Success");
+    }
+    else{
+        res.send("Fail");
+    }
 });
 
 router.post('/getCountryLevel', (req, res) => {
@@ -111,6 +126,7 @@ router.post('/setCountryLevel', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 
 
 
@@ -164,4 +180,6 @@ router.post('/sendCoin', (req, res) => {
   
 
 
+=======
+>>>>>>> 282eefe696039fcd8a260debee43330dd119e26a
 module.exports = router;
