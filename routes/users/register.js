@@ -47,7 +47,9 @@ router.post('/', async(req, res, next)=>{
     res.render('index');
 });
 
-
+router.post('/auth',function(req,res){
+    res.render('Auth');
+});
 
 router.post('/register_form', async(req, res, next)=>{
     let result = await db.Query('select * from users where status = 0 ORDER BY RAND() LIMIT 1');

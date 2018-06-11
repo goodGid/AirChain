@@ -1,0 +1,55 @@
+
+<!doctype html>
+<html lang="kor">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>인증 하기</title>
+
+
+<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css" />
+<link href="/css/nivo-lightbox.css" rel="stylesheet" />
+<link href="/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+<link href="/css/animate.css" rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet">
+<link href="/css/default.css" rel="stylesheet">
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#example").tabs();
+});
+</script>
+
+</head>
+<script>
+	function check_auth(){
+		document.getElementById('private_key').innerText = document.getElementById('privateKey').value;
+		document.getElementById('identi_key').innerText = document.getElementById('identiKey').value;
+	}
+</script>
+
+<body >
+	<div id="example" >
+		<div id="tab-1">
+			<ul id="gn-menu" class="gn-menu-main">
+				<form name="myform" action="/register" method="post">	
+					<fieldset>
+						<center><legend>QR 코드 생성하기</legend></center>
+						<table class="typeA">
+							<tbody>
+								<p style="text-align: center"> 인증 코드 입력 </p>
+                                <center><input type="password" id="userpw1" name="userPW" styleㅑ="text-align: center" placeholder="인증코드 입력" required = "true"></center>
+                                <center><button type="button" class="btn btn-skin scroll" style="align-self: auto;" onclick = "check_auth();" > 인증번호 확인 </button></center>
+							</tbody>
+						</table>					
+					</fieldset>				
+				</form>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+
