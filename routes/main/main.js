@@ -62,16 +62,31 @@ router.post('/login', async(req,res,next) => {
 })
 
 
-router.post('/book', (req, res) => {
+router.post('/book', async (req, res) => {
     console.log("**** POST /book ****");
   
     let countryId = req.body.countryId;
     let userIdx = req.body.userIdx;
     let sender = req.body.sender;
 
-    airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
-      res.send(result);
+    await airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
+    //   res.send(result);
     });
+
+
+    let insertQuery =
+    `
+    INSERT INTO book_list(id,country)
+    VALUES (?,?)
+    `;
+
+    let result = await db.Query(insertQuery,[userIdx,countryId]);
+    if(result.length != 0){
+        res.send("Success");
+    }
+    else{
+        res.send("Fail");
+    }
 });
 
 router.post('/getCountryLevel', (req, res) => {
@@ -110,61 +125,5 @@ router.post('/setCountryLevel', (req, res) => {
       res.send(result);
     });
 });
-
-
-
-
-
-
-
-
-/*
-    Meta Coin
-*/
-
-
-
-router.get('/getAccounts', (req, res) => {
-    console.log("**** GET /getAccounts ****");
-    meta_truffle_connect.start(function (answer) {
-        console.log('answer : ' + answer);
-      res.send(answer);
-    })
-});
-
-
-
-router.post('/getBalance', (req, res) => {
-    console.log("**** GET /getBalance ****");
-    console.log(req.body);
-
-    let currentAcount = req.body.account;
-    meta_truffle_connect.refreshBalance(currentAcount, (answer) => {
-        let account_balance = answer;
-        meta_truffle_connect.start(function(answer){
-            // get list of all accounts and send it along with the response
-            let all_accounts = answer;
-            response = [account_balance, all_accounts]
-            res.send(response);
-    });
-});
-});
-  
-  
-  
-router.post('/sendCoin', (req, res) => {
-    console.log("**** GET /sendCoin ****");
-    console.log(req.body);
-  
-    let amount = req.body.amount;
-    let sender = req.body.sender;
-    let receiver = req.body.receiver;
-  
-    meta_truffle_connect.sendCoin(amount, sender, receiver, (balance) => {
-      res.send(balance);
-    });
-});
-  
-
 
 module.exports = router;
