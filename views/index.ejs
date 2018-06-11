@@ -26,7 +26,7 @@
                     <div class="gn-scroller">
                         <ul class="gn-menu">
                             <li class="gn-search-item">
-                                <a href="#login" class="gn-icon gn-icon-login">Login</a>
+                                <a href="#login" class="gn-icon gn-icon-download">Login</a>
                             </li>
                             <li>
                                 <a href="#about" class="gn-icon gn-icon-download">About</a>
@@ -58,8 +58,8 @@
         </div>
     </section>
     <!-- /Section: intro -->
+   
 
-    
     
     
     <section id ="login" class ="home-section text-center bg-gray">
@@ -70,14 +70,17 @@
             <h3 class="form-signin-heading">지금 로그인 하세요!</h3>
               <hr class="colorgraph"><br>
 
-              <input type="text" class="form-control" name="id" placeholder="Username" required="true" />
-              <input type="password" class="form-control" name="password" placeholder="Password" required="true"/>             
-
-              <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
+              <center><input type="text" class="form-control" name="id" placeholder="Username" required="true" /></center>
+              <center><input type="password" class="form-control" name="password" placeholder="Password" required="true"/></center>             
+                <br></br>
+              <center><button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button></center>
         </form>
         <form action="/register/register_form" method ="post" name ="Register_Form" class="form-signin">
-            <button class="btn btn-lg btn-primary btn-block"  name="Register" value="New" type="Submit" >회원가입</button>
-        </form>            
+            <center><button class="btn btn-lg btn-primary btn-block"  name="Register" value="New" type="Submit" >회원가입</button></center>
+        </form>
+        <form action="/register/auth" method ="post" name ="Register_Form" class="form-signin">        
+            <center><button class="btn btn-lg btn-primary btn-block" name="Register" value="New" type="Submit" >인증하기</button></center>
+        </form>
                 </div>
             </div>
         </div>

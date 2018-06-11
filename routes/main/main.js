@@ -126,4 +126,60 @@ router.post('/setCountryLevel', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+
+
+
+
+/*
+    Meta Coin
+*/
+
+
+
+router.get('/getAccounts', (req, res) => {
+    console.log("**** GET /getAccounts ****");
+    meta_truffle_connect.start(function (answer) {
+        console.log('answer : ' + answer);
+      res.send(answer);
+    })
+});
+
+
+
+router.post('/getBalance', (req, res) => {
+    console.log("**** GET /getBalance ****");
+    console.log(req.body);
+
+    let currentAcount = req.body.account;
+    meta_truffle_connect.refreshBalance(currentAcount, (answer) => {
+        let account_balance = answer;
+        meta_truffle_connect.start(function(answer){
+            // get list of all accounts and send it along with the response
+            let all_accounts = answer;
+            response = [account_balance, all_accounts]
+            res.send(response);
+    });
+});
+});
+  
+  
+  
+router.post('/sendCoin', (req, res) => {
+    console.log("**** GET /sendCoin ****");
+    console.log(req.body);
+  
+    let amount = req.body.amount;
+    let sender = req.body.sender;
+    let receiver = req.body.receiver;
+  
+    meta_truffle_connect.sendCoin(amount, sender, receiver, (balance) => {
+      res.send(balance);
+    });
+});
+  
+
+
+=======
+>>>>>>> 282eefe696039fcd8a260debee43330dd119e26a
 module.exports = router;
