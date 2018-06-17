@@ -45,10 +45,9 @@ router.post('/check_identiKey', async(req,res,next) => {
 
 
 router.post('/create_qrcode',function(req,res){
+    const identiKey = req.body.identiKey;
 
-    let inputStr = "test";
-
-    QRCode.toDataURL(inputStr, function(err , url){
+    QRCode.toDataURL(identiKey, function(err , url){
         let data = url.replace(/.*,/,'')
         let img = new Buffer(data,'base64')
         res.writeHead(200,{
