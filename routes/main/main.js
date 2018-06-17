@@ -67,23 +67,8 @@ router.post('/book', async (req, res) => {
 
 
     await airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
-        console.log('chkBook Result : ' + result);
+        res.send(result);
     });
-
-
-    let insertQuery =
-    `
-    INSERT INTO book_list(id,country)
-    VALUES (?,?)
-    `;
-
-    let result = await db.Query(insertQuery,[userIdx,countryId]);
-    if(result.length != 0){
-        res.send("Success");
-    }
-    else{
-        res.send("Fail");
-    }
 });
 
 
