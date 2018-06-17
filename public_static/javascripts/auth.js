@@ -23,9 +23,7 @@ $(document).ready(function () {
       var countryId = parseInt($(event.target).data("id"));
       var userIdx = parseInt($('#userIdx').text());
       var sender = $('#sender').text();
-  
-      console.log('countryId : ' + countryId);
-  
+    
       $.post('/book', {countryId : countryId, userIdx : userIdx, sender : sender}, function (res) {
         alert("Booking " + res);
         return(res);
