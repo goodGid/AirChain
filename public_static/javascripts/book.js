@@ -25,9 +25,15 @@ $(document).ready(function () {
     var sender = $('#sender').text();
 
     console.log('countryId : ' + countryId);
-
+    
     $.post('/book', {countryId : countryId, userIdx : userIdx, sender : sender}, function (res) {
       alert("Booking " + res);
+      
+      if(res == "Success"){
+        var btn = document.getElementById("book");
+        console.log(btn);
+        btn.disabled = true;
+      }
       return(res);
     });
   })
