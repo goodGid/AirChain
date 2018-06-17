@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const db = require('../../module/pool.js');
 
 const airport_truffle_connect = require('../../connection/bc_airport.js');
-const meta_truffle_connect = require('../../connection/bc_metacoin.js');
 
 /*
  Method : Get
@@ -31,10 +30,6 @@ router.get('/main/:userIdx&:userLevel&:account_key',function(req,res){
     });
 });
 
-
-router.get('/main2',function(req,res){
-    res.render('main');
-});
 
 
 /*
@@ -91,6 +86,7 @@ router.post('/book', async (req, res) => {
     }
 });
 
+
 router.post('/getCountryLevel', (req, res) => {
     console.log("**** POST /getCountryLevel ****");
   
@@ -127,58 +123,6 @@ router.post('/setCountryLevel', (req, res) => {
       res.send(result);
     });
 });
-
-
-
-
-
-/*
-    Meta Coin
-*/
-
-
-
-router.get('/getAccounts', (req, res) => {
-    console.log("**** GET /getAccounts ****");
-    meta_truffle_connect.start(function (answer) {
-        console.log('answer : ' + answer);
-      res.send(answer);
-    })
-});
-
-
-
-router.post('/getBalance', (req, res) => {
-    console.log("**** GET /getBalance ****");
-    console.log(req.body);
-
-    let currentAcount = req.body.account;
-    meta_truffle_connect.refreshBalance(currentAcount, (answer) => {
-        let account_balance = answer;
-        meta_truffle_connect.start(function(answer){
-            // get list of all accounts and send it along with the response
-            let all_accounts = answer;
-            response = [account_balance, all_accounts]
-            res.send(response);
-    });
-});
-});
-  
-  
-  
-router.post('/sendCoin', (req, res) => {
-    console.log("**** GET /sendCoin ****");
-    console.log(req.body);
-  
-    let amount = req.body.amount;
-    let sender = req.body.sender;
-    let receiver = req.body.receiver;
-  
-    meta_truffle_connect.sendCoin(amount, sender, receiver, (balance) => {
-      res.send(balance);
-    });
-});
-  
 
 
 module.exports = router;
