@@ -126,7 +126,6 @@ router.post('/setCountryLevel', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 
 
 
@@ -180,6 +179,4 @@ router.post('/sendCoin', (req, res) => {
   
 
 
-=======
->>>>>>> 282eefe696039fcd8a260debee43330dd119e26a
 module.exports = router;
