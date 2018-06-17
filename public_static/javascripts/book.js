@@ -1,3 +1,21 @@
+
+
+function chk_bookLevel(){
+  var userLevel = parseInt($('#userLevel').text());
+  var length = $('#booksRow > div').length;
+
+  for(i=1; i<=length; i++ ){
+    let value = $('#booksRow > div:nth-child(' + i + ') > div > div.panel-body > span').text();
+
+    if( userLevel < value ){
+      let btn = $('#booksRow > div:nth-child(' + i + ') > div > div.panel-body > button');
+      // btn.prop("disabled", true); // 이것도 가능 
+      btn.attr("disabled","disabled"); 
+    }
+  }
+}
+
+
 $(document).ready(function () {
   var curraccount;
   var selectedAccount;
@@ -6,7 +24,7 @@ $(document).ready(function () {
     var booksRow = $('#booksRow');
     var bookTemplate = $('#bookTemplate');
     var userLevel = parseInt($('#userLevel').text());
-    console.log(userLevel);
+
     for (i = 0; i < data.length; i ++) {
         bookTemplate.find('.panel-title').text(data[i].name);
         bookTemplate.find('img').attr('src', "/" + data[i].picture);
@@ -14,20 +32,21 @@ $(document).ready(function () {
         bookTemplate.find('.btn-book').attr('data-id', data[i].id);
         bookTemplate.find('.btn-getCountryLevel').attr('data-id', data[i].id);
 
-
       booksRow.append(bookTemplate.html());
     }
+
+    // 1st 방법
+    // chk_bookLevel();  // 함수 사용
     
+    // 2st 방법
     for(i=0; i<booksRow[0].getElementsByClassName('country-level').length; i++){
-  
-    var country_level= booksRow[0].getElementsByClassName('country-level').item(i).textContent;
-    
-    if(country_level > userLevel){
+      var country_level= booksRow[0].getElementsByClassName('country-level').item(i).textContent;
+      if(country_level > userLevel){
         booksRow[0].getElementsByClassName('btn btn-default btn-book').item(i).disabled =true;
       }
     }
   
-  })
+  });
 
 
   $(document).on('click', '.btn-book' ,function(){        
@@ -49,7 +68,7 @@ $(document).ready(function () {
       }
       return(res);
     });
-  })
+  });
 
   $('#updateMyLevel').click(function () {
     var userIdx = parseInt($('#userIdx').text());
