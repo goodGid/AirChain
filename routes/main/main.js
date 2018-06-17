@@ -63,11 +63,13 @@ router.post('/login', async(req,res,next) => {
 
 
 router.post('/book', async (req, res) => {
+
     console.log("**** POST /book ****");
   
     let countryId = req.body.countryId;
     let userIdx = req.body.userIdx;
     let sender = req.body.sender;
+
 
     await airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
     //   res.send(result);
