@@ -67,7 +67,7 @@ router.post('/book', async (req, res) => {
 
 
     await airport_truffle_connect.chkBook(countryId, userIdx, sender, (result) => {
-    //   res.send(result);
+        console.log('chkBook Result : ' + result);
     });
 
 
