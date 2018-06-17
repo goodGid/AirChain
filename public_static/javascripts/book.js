@@ -38,22 +38,6 @@ $(document).ready(function () {
     });
   })
 
-  $(document).on('click', '.btn-getCountryLevel' ,function(){        
-    event.preventDefault();
-
-    var countryId = parseInt($(event.target).data("id"));
-    var sender = $('#sender').text();
-
-    console.log('countryId : ' + countryId);
-
-    $.post('/book', {countryId : countryId, sender : sender}, function (res) {
-      alert("GetCountryLevel " + res);
-      return(res);
-    });
-  })
-
-
-   
   $('#updateMyLevel').click(function () {
     var userIdx = parseInt($('#userIdx').text());
     var userLevel = parseInt($('#userLevel').text());
@@ -61,15 +45,6 @@ $(document).ready(function () {
 
     $.post('/updateMyLevel', {userIdx : userIdx, userLevel : userLevel, sender : sender}, function (res) {
       alert("Update " + res);
-    })
-  });
-
-
-  $('#setCountryLevel').click(function () {
-    var sender = $('#sender').text();
-
-    $.post('/setCountryLevel', {sender : sender}, function (res) {
-      alert("setCountryLevel " + res);
     })
   });
 
