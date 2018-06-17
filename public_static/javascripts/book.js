@@ -27,7 +27,7 @@ $(document).ready(function () {
       }
     }
   
-  })
+  });
 
 
   $(document).on('click', '.btn-book' ,function(){        
@@ -49,7 +49,7 @@ $(document).ready(function () {
       }
       return(res);
     });
-  })
+  });
 
   $('#updateMyLevel').click(function () {
     var userIdx = parseInt($('#userIdx').text());
