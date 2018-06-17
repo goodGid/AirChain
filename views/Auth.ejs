@@ -22,8 +22,18 @@
 
 <script>
 	function check_auth(){
-		document.getElementById('private_key').innerText = document.getElementById('privateKey').value;
-		document.getElementById('identi_key').innerText = document.getElementById('identiKey').value;
+		let identiKey = document.getElementById('identiKey').value;
+
+		$.post('/auth/check_identiKey', {identiKey : identiKey}, function (res) {
+			var btn = document.getElementById("create_qrcode");
+			if(res == "Success"){
+				btn.disabled = false;
+			}
+			else {
+				btn.disabled = true;
+			}
+			return(res)
+		});
 	}
 	
 </script>
@@ -41,21 +51,18 @@
 						<table class="typeA">
 							<tbody>
 								<p style="text-align: center"> 인증 코드 입력 </p>
-                                <center><input type="password" id="userpw1" name="userPW" styleㅑ="text-align: center" placeholder="인증코드 입력" required = "true"></center>
-                                <center><button type="button" class="btn btn-skin scroll" style="align-self: auto;" onclick = "check_auth();" > 인증번호 확인 </button></center>
+                                <center><input type="password" id="identiKey" styleㅑ="text-align: center" placeholder="인증코드 입력" value= "" required = "true"></center>
+								<center><button type="button" class="btn btn-skin scroll" style="align-self: auto;" onclick = "check_auth();" > 인증번호 확인 </button></center>
+								<center><button type="Submit" id="create_qrcode" class="btn btn-skin scroll" style="align-self: auto;" disabled> QR Code 만들기 </button></center>
 							</tbody>
 						</table>					
 					</fieldset>				
-				</form>
-
-				<form name="myform" action="/auth/create_qrcode" method="post">	
-					  <button class="btn btn-lg btn-primary btn-block"  value="create_QRCode" type="Submit">Create QRCode</button>
 				</form>
 			</ul>
 		</div>
 	</div>
 
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </body>
 </html>
 

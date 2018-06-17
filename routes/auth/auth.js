@@ -23,13 +23,32 @@ router.post('/',function(req,res){
 });
 
 
+router.post('/check_identiKey', async(req,res,next) => {
+    const identiKey = req.body.identiKey;
+
+    let selectIdentiKey =
+    `
+    SELECT count(*) as cnt
+    FROM users
+    WHERE id = ?
+    `;
+
+    let result = await db.Query(selectIdentiKey,[identiKey]);
+    if(result[0].cnt == 1){
+        res.send("Success");
+    }
+    else{
+        res.send("Fail");
+    }
+})
+
+
 
 router.post('/create_qrcode',function(req,res){
 
     let inputStr = "test";
 
     QRCode.toDataURL(inputStr, function(err , url){
-
         let data = url.replace(/.*,/,'')
         let img = new Buffer(data,'base64')
         res.writeHead(200,{
