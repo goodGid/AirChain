@@ -5,17 +5,22 @@ $(document).ready(function () {
   $.getJSON('../country.json', function(data) {
     var booksRow = $('#booksRow');
     var bookTemplate = $('#bookTemplate');
-
+    var userLevel = parseInt($('#userLevel').text());
+    console.log(userLevel);
     for (i = 0; i < data.length; i ++) {
         bookTemplate.find('.panel-title').text(data[i].name);
         bookTemplate.find('img').attr('src', "/" + data[i].picture);
         bookTemplate.find('.country-level').text(data[i].level);
         bookTemplate.find('.btn-book').attr('data-id', data[i].id);
         bookTemplate.find('.btn-getCountryLevel').attr('data-id', data[i].id);
-
+        console.log(data[i].level);
+        if(userLevel < data[i].level){
+          a.prop("disabled", true);
+        }
       booksRow.append(bookTemplate.html());
     }
   })
+
 
   $(document).on('click', '.btn-book' ,function(){        
     event.preventDefault();

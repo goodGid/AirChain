@@ -22,25 +22,6 @@ router.post('/',function(req,res){
     res.render('auth');
 });
 
-app.get('/:qrcode',(req, res) =>{
-
-    let inputStr = req.params.qrcode;
-
-    QRCode.toDataURL(inputStr, function (err, url) {
-
-
-        let data = url.replace(/.*,/,'')
-        let img = new Buffer(data,'base64')
-        res.writeHead(200,{
-            'Content-Type' : 'image/png',
-            'Content-Length' : img.length
-        })
-        res.end(img)
-
-    })
-
-
-})
 
 
 router.post('/create_qrcode',function(req,res){
