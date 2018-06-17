@@ -13,6 +13,10 @@ const QRCode = require('qrcode');
  Method : Get
 */
 
+router.get('/qr_scanner',function(req,res){
+    res.render('qr_scanner');
+});
+
 
 /*
  Method : Post
@@ -21,6 +25,26 @@ const QRCode = require('qrcode');
 router.post('/',function(req,res){
     res.render('auth');
 });
+
+
+router.post('/check_qr_code', async(req,res,next) => {
+    const qr_code = req.body.qr_code;
+
+    let selectQRCode =
+    `
+    SELECT count(*) as cnt
+    FROM book_list
+    WHERE id = ?
+    `;
+
+    let result = await db.Query(selectQRCode,[qr_code]);
+    if(result[0].cnt > 0){
+        res.send("Success");
+    }
+    else{
+        res.send("Fail");
+    }
+})
 
 
 router.post('/check_identiKey', async(req,res,next) => {
@@ -49,6 +73,15 @@ router.post('/create_qrcode',function(req,res){
 
     QRCode.toDataURL(identiKey, function(err , url){
         let data = url.replace(/.*,/,'')
+
+        let insertQuery =
+        `
+        INSERT INTO qr_code(value)
+        VALUES (?)
+        `;
+
+        db.Query(insertQuery,[data]);
+
         let img = new Buffer(data,'base64')
         res.writeHead(200,{
             'Content-Type' : 'image/png',
