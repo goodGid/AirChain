@@ -17,25 +17,25 @@
 <link href="/css/style.css" rel="stylesheet">
 <link href="/css/default.css" rel="stylesheet">
 
-<script type="text/javascript">
-$(document).ready(function() {
-	$("#example").tabs();
-});
-</script>
 
 </head>
+
 <script>
 	function check_auth(){
 		document.getElementById('private_key').innerText = document.getElementById('privateKey').value;
 		document.getElementById('identi_key').innerText = document.getElementById('identiKey').value;
 	}
+	
 </script>
 
 <body >
+
+	<div id="qrcode"></div>
+
 	<div id="example" >
 		<div id="tab-1">
 			<ul id="gn-menu" class="gn-menu-main">
-				<form name="myform" action="/register" method="post">	
+				<form name="myform" action="/auth/create_qrcode" method="post">	
 					<fieldset>
 						<center><legend>QR 코드 생성하기</legend></center>
 						<table class="typeA">
@@ -47,9 +47,15 @@ $(document).ready(function() {
 						</table>					
 					</fieldset>				
 				</form>
+
+				<form name="myform" action="/auth/create_qrcode" method="post">	
+					  <button class="btn btn-lg btn-primary btn-block"  value="create_QRCode" type="Submit">Create QRCode</button>
+				</form>
 			</ul>
 		</div>
 	</div>
+
+
 </body>
 </html>
 
