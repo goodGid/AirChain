@@ -13,12 +13,20 @@ $(document).ready(function () {
         bookTemplate.find('.country-level').text(data[i].level);
         bookTemplate.find('.btn-book').attr('data-id', data[i].id);
         bookTemplate.find('.btn-getCountryLevel').attr('data-id', data[i].id);
-        console.log(data[i].level);
-        if(userLevel < data[i].level){
-          a.prop("disabled", true);
-        }
+
+
       booksRow.append(bookTemplate.html());
     }
+    
+    for(i=0; i<booksRow[0].getElementsByClassName('country-level').length; i++){
+  
+    var country_level= booksRow[0].getElementsByClassName('country-level').item(i).textContent;
+    
+    if(country_level > userLevel){
+        booksRow[0].getElementsByClassName('btn btn-default btn-book').item(i).disabled =true;
+      }
+    }
+  
   });
 
 
