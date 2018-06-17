@@ -12,4 +12,8 @@ router.use('/', main_page);
 const Register = require('./users/users_routes');
 router.use('/register', Register);
 
+// Auth
+const auth = require('./auth/auth_routes');
+router.use('/auth', auth);
+
 module.exports = router;
