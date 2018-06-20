@@ -76,7 +76,7 @@ router.post('/create_qrcode',function(req,res){
 
         let insertQuery =
         `
-        INSERT INTO qr_code(value)
+        INSERT INTO book_list(id)
         VALUES (?)
         `;
 
