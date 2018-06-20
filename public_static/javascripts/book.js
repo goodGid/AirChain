@@ -3,6 +3,7 @@
 function chk_bookLevel(){
   var userLevel = parseInt($('#userLevel').text());
   var length = $('#booksRow > div').length;
+  // Test
 
   for(i=1; i<=length; i++ ){
     let value = $('#booksRow > div:nth-child(' + i + ') > div > div.panel-body > span').text();
