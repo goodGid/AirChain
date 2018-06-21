@@ -31,7 +31,7 @@ function showInfo(data) {
 	else{
 	$.post('/auth/check_qr_code', {qr_code : data}, function (res) {
 		if(res == "Success"){
-			$("#qrContent p").text("승인 완료");
+			$("#qrContent p").text("승인 완료 : " + data);
 		}
 		else{
 			$("#qrContent p").text("인증 실패");
