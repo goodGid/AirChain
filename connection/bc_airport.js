@@ -38,6 +38,28 @@ module.exports = {
     Airport.deployed().then(function(instance) {
       air = instance;
       return air.chkBook.call(countryId,userIdx, {from: sender});
+      // return air.setUserLevel.call(1,5, {from: sender}); // setUserLevel 테스트하기위한 코드
+    }).then(function(res) {
+        callback(res);
+    }).catch(function(e) {
+      console.log("Error : " + e);
+      callback("ERROR 404");
+    });
+
+  },
+
+
+  getUserLevel: function(countryId,userIdx,sender,callback){
+    var self = this;
+
+    // Bootstrap the Airport abstraction for Use.
+    Airport.setProvider(self.web3.currentProvider);
+
+    var air
+    Airport.deployed().then(function(instance) {
+      air = instance;
+      // return air.chkBook.call(countryId,userIdx, {from: sender});
+      return air.getUserLevel.call(1,{from: sender});
     }).then(function(res) {
         callback(res);
     }).catch(function(e) {

@@ -72,6 +72,21 @@ router.post('/book', async (req, res) => {
 });
 
 
+router.post('/userLevel', async (req, res) => {
+
+    console.log("**** POST /userLevel ****");
+  
+    let countryId = req.body.countryId;
+    let userIdx = req.body.userIdx;
+    let sender = req.body.sender;
+
+
+    await airport_truffle_connect.getUserLevel(countryId, userIdx, sender, (result) => {
+        res.send(result);
+    });
+});
+
+
 router.post('/getCountryLevel', (req, res) => {
     console.log("**** POST /getCountryLevel ****");
   

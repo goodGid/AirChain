@@ -80,7 +80,7 @@ router.post('/create_qrcode',function(req,res){
         VALUES (?)
         `;
 
-        db.Query(insertQuery,[data]);
+        db.Query(insertQuery,[identiKey]);
 
         let img = new Buffer(data,'base64')
         res.writeHead(200,{

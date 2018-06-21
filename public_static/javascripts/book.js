@@ -67,6 +67,22 @@ $(document).ready(function () {
     });
   })
 
+  $(document).on('click', '.btn-user' ,function(){        
+    event.preventDefault();
+
+    var countryId = parseInt($(event.target).data("id"));
+    var userIdx = parseInt($('#userIdx').text());
+    var sender = $('#sender').text();
+
+    
+    $.post('/userLevel', {sender : sender}, function (res) {
+      alert("UserLevel " + res);
+      return(res);
+    });
+  })
+
+
+
   $('#updateMyLevel').click(function () {
     var userIdx = parseInt($('#userIdx').text());
     var userLevel = parseInt($('#userLevel').text());

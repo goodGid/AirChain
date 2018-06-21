@@ -2,6 +2,7 @@ pragma solidity ^0.4.17;
 
 contract Airport {
     address[16] public country;
+    uint[16] public userLevelList;
 
     mapping (uint => uint) public country_level;
     mapping (uint => uint) public user_level;
@@ -16,10 +17,14 @@ contract Airport {
         return true;
     }
 
-    function setUserLevel(uint user_idx, uint _user_level) public returns (bool success)  {
+    function setUserLevel(uint user_idx, uint _user_level) public returns (uint)  {
         require(user_idx >= 0 && user_idx <= 15);
-        user_level[user_idx] = _user_level;
-        return true;
+        userLevelList[user_idx] = _user_level;
+        return userLevelList[user_idx];
+    }
+
+    function getUserLevel(uint user_idx) view public returns (uint)  {
+        return userLevelList[user_idx];
     }
 
 
