@@ -1,17 +1,19 @@
-## Passport
-
-Replace your passport with a block chain
+## Passport : Replace your passport with a block chain
 
 
+---
 
-
-동기 
+## 개발 동기 
 
 ![](/public_static/images/readme_image/1.png)
 
-기대 효과
+---
+
+## 기대 효과
 
 ![](/public_static/images/readme_image/2.png)
+
+---
 
 ## System Architecture
 
