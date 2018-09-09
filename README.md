@@ -1,4 +1,4 @@
-## Passport : Replace your passport with a block chain
+## Replace your passport with a block chain
 
 
 ---
@@ -22,6 +22,8 @@
 ![](/public_static/images/readme_image/4.png)
 
 ![](/public_static/images/readme_image/5.png)
+
+---
 
 ## Service Logic 
 
