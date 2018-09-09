@@ -15,14 +15,14 @@ Replace your passport with a block chain
 
 ## System Architecture
 
+![](/public_static/images/readme_image/3.png)
+
 ![](/public_static/images/readme_image/4.png)
 
 ![](/public_static/images/readme_image/5.png)
 
-![](/public_static/images/readme_image/6.png)
-
 ## Service Logic 
 
-![](/public_static/images/readme_image/7.png)
+![](/public_static/images/readme_image/6.png)
 
-![](/public_static/images/readme_image/8.png)
+![](/public_static/images/readme_image/7.png)
